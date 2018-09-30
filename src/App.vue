@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <component :is="currentMenu" :right="side === 'right' ? true: false">
+        <component :is="currentMenu" :right="side === 'right' ? true: false" menuLabel="filter">
             <a href="#">
                 <i class="fa fa-fw fa-star-o"></i>
                 <span>Favourites</span>

@@ -11,19 +11,31 @@
         </div>
 
         <div class="bm-burger-button" @click="openMenu">
-            <span class="bm-burger-bars line-style" :style="{top:20 * (index * 2) + '%'}" v-for="(x, index) in 3" :key="index"></span>
+          <p class="label">
+            <span>{{menuLabel}}</span>
+            <font-awesome-icon icon="angle-double-right" />
+          </p>
         </div>
 
     </div>
 </template>
 
 <script>
+    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+    import { library } from '@fortawesome/fontawesome-svg-core'
+    import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
+
+    library.add(faAngleDoubleRight)
+
     export default {
       name: 'menubar',
       data() {
         return {
           isSideBarOpen: false
         };
+      },
+      components: {
+        'font-awesome-icon': FontAwesomeIcon
       },
       props: {
         isOpen: {
@@ -60,6 +72,10 @@
           type: Boolean,
           required: false,
           default: true
+        },
+        menuLabel: {
+          type: String,
+          default: "Menu"
         }
       },
       methods: {
@@ -102,13 +118,6 @@
         documentClick(e) {
           let element = document.querySelector('.bm-burger-button');
           let target = e.target;
-          if (
-            element !== target &&
-            !element.contains(target) &&
-            e.target.className !== 'bm-menu'
-          ) {
-            this.closeMenu();
-          }
         }
       },
 
@@ -232,6 +241,16 @@
       margin-left: 10px;
       font-weight: 700;
       color: white;
+    }
+
+    .label {
+      display: flex;
+      align-items: center;
+      margin-left: 4px;
+    }
+    .label span{
+      margin-right: 10px;
+      text-transform: uppercase;
     }
 </style>
 
